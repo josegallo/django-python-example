@@ -1,8 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Question
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Awesome Jose, this is your 1st index page '
-                        'in python!! of our pools application')
+    latest_questions = Question.objects.order_by('-pub_date')[:5]
+    #Throw the lastest question ordered by date of publication
+    output = ", ".join(q.question_text for q in latest_questions)
+    #The output will be the string of the iteration over the lastest questions
+    return  HttpResponse(output)
+
+def detail(request, question_id):
+    return HttpResponse('This is the detail view of the question: %s' % question_id)
+
+def results(request, question_id):
+    return HttpResponse('This are the results of the question: %s' % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("Vote on question: %s" % question_id)
