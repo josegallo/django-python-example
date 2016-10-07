@@ -1,19 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Question
-from django.template import loader, RequestContext
 # Create your views here.
 
 def index(request):
     latest_questions = Question.objects.order_by('-pub_date')[:5]
-    #First option to render the template
-    #Throw the lastest question ordered by date of publication
-    template = loader.get_template('polls/index.html')
-    #loads our template
-    context = RequestContext(request, {'latest_questions':latest_questions})
-    #define the context to be rendered with the latest_questions objects
-
-    return HttpResponse(template.render(context))
+    #better option to render the template
+    context = {'latest_questions':latest_questions}
+    #make a dictionary with the object to render
+    return render(request,'polls/index.html',context)
+    #render the objects
 
 def detail(request, question_id):
     return HttpResponse('This is the detail view of the question: %s' % question_id)
