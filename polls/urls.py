@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^(?P<question_id>[0-9]+)/$', views.detail, name="detail"),
     #the url will be 127.0.0.1/polls/any_number, ex: 127.0.0.1/polls/1
     url(r'^(?P<question_id>[0-9]+)/results$', views.results, name="result"),
-    #the url will be 127.0.0.1/polls/any number/results/
+    #the url will be 127.0.0.1/polls/any number/results/  Ex: 127.0.0.1/polls/1/results
     url(r'^(?P<question_id>[0-9]+)/vote$', views.vote, name="vote"),
     # 127.0.0.1/polls/1/vote/
 ]
