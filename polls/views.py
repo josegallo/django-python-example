@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Question
 # Create your views here.
@@ -12,7 +12,7 @@ def index(request):
     #render the objects
 
 def detail(request, question_id):
-    question = Question.objects.get(pk = question_id)
+    question = get_object_or_404(Question, pk = question_id)
     context = {'question': question}
     return render(request, 'polls/detail.html', context)
 
